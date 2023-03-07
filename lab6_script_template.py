@@ -25,15 +25,41 @@ def main():
         delete_installer(installer_path)
 
 def get_expected_sha256():
+    
+    
+    file_url = 'https://download.videolan.org/pub/videolan/vlc/3.0.18/win64/vlc-3.0.18-win64.exe.sha256'
+    resp_msg = requests.get(file_url)
+    
+    if resp_msg.status_code == requests.codes.ok:
+        realhash = resp_msg.text.split()
+
+
+    
+    # Extract text file content from response message
+        file_content = resp_msg.text
+    
+    
+    
     return 
 
 def download_installer():
+    
+    
+    
+    
     return
 
 def installer_ok(installer_data, expected_sha256):
+    
+    
+    
+    
     return
 
 def save_installer(installer_data):
+    
+    
+    
     return
 
 def run_installer(installer_path):
