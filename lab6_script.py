@@ -31,30 +31,32 @@ def get_expected_sha256():
     resp_msg = requests.get(file_url)
     
     if resp_msg.status_code == requests.codes.ok:
-        realhash = resp_msg.text.split()
+        real_hash = resp_msg.text
+        hash = real_hash.split()
 
-
     
-    # Extract text file content from response message
-        file_content = resp_msg.text
-    
-    
-    
-    return 
+    return hash[0]
 
 def download_installer():
     
+    installer_url = 'https://download.videolan.org/pub/videolan/vlc/3.0.18/win64/vlc-3.0.18-win64.exe'
+    resp_msg = requests.get(installer_url)
     
-    
-    
-    return
+    if resp_msg.status_code == requests.codes.ok:
+
+        installer_data = resp_msg.content
+
+    return installer_data
 
 def installer_ok(installer_data, expected_sha256):
     
-    
-    
-    
-    return
+    downloaded_hash = hashlib.sha256(installer_data).hexdigest()
+    if expected_sha256 == downloaded_hash:
+        return True
+    else:
+        return False
+   
+
 
 def save_installer(installer_data):
     
@@ -63,9 +65,15 @@ def save_installer(installer_data):
     return
 
 def run_installer(installer_path):
+    
+    subprocess.run([installer_path, '/L=1033' "/S"])
+    
     return
     
 def delete_installer(installer_path):
+    
+    os.remove(installer_path)
+    
     return
 
 if __name__ == '__main__':
